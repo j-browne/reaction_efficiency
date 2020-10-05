@@ -1,0 +1,15 @@
+[package]
+name = "reaction_efficiency"
+version = "0.1.0"
+authors = ["Justin Browne <jebdude89@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "*"
+lazy_static = "*"
+rand = "*"
+rayon = "*"
+serde = "*"
+serde_derive = "*"
+serde_json = "*"
+structopt = "*"

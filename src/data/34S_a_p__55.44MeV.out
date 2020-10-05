@@ -1,0 +1,419 @@
+#
+#    TALYS-1.8 (Version: December 28, 2015)
+#
+# Copyright (C) 2015  A.J. Koning, S. Hilaire and S. Goriely      
+#                         NRG          CEA          ULB    
+#
+# Dimensions - Cross sections: mb, Energies: MeV, Angles: degrees
+#
+# ########## USER INPUT ##########
+#
+# USER INPUT FILE
+#
+# projectile a                                                                    
+# element s                                                                       
+# mass 34                                                                         
+# energy 6.5224                                                                   
+# nlevels 17 37 2                                                                 
+# outdiscrete y                                                                   
+#
+# USER INPUT FILE + DEFAULTS
+#
+# Keyword           Value   Variable     Explanation
+#
+# #
+# # Four main keywords
+# #
+# projectile          a     ptype0       type of incident particle
+# element            S      Starget      symbol of target nucleus
+# mass               34     mass         mass number of target nucleus
+# energy              6.522 eninc        incident energy in MeV
+# #
+# # Basic physical and numerical parameters
+# #
+# ejectiles g n p d t h a   outtype      outgoing particles
+# maxz               12     maxZ         maximal number of protons away from the initial compound nucleus
+# maxn               17     maxN         maximal number of neutrons away from the initial compound nucleus
+# bins               40     nbins        number of continuum excitation energy bins
+# equidistant         n     flagequi     flag to use equidistant excitation bins instead of logarithmic bins
+# popmev              n     flagpopmev   flag to use initial population per MeV instead of histograms
+# segment             1     segment      number of segments to divide emission energy grid
+# maxlevelstar       30     nlevmax      maximum number of included discrete levels for target
+# maxlevelsres       10     nlevmaxres   maximum number of included discrete levels for residual nucleus
+# maxlevelsbin g     10     nlevbin      maximum number of included discrete levels for gamma    channel
+# maxlevelsbin n     10     nlevbin      maximum number of included discrete levels for neutron  channel
+# maxlevelsbin p     10     nlevbin      maximum number of included discrete levels for proton   channel
+# maxlevelsbin d      5     nlevbin      maximum number of included discrete levels for deuteron channel
+# maxlevelsbin t      5     nlevbin      maximum number of included discrete levels for triton   channel
+# maxlevelsbin h      5     nlevbin      maximum number of included discrete levels for helium-3 channel
+# maxlevelsbin a     30     nlevbin      maximum number of included discrete levels for alpha    channel
+# ltarget             0     ltarget      excited level of target
+# isomer           1.00E+00 isomer       definition of isomer in seconds
+# transpower          5     transpower   power for transmission coefficient limit
+# transeps         1.00E-08 transeps     limit for transmission coefficient
+# xseps            1.00E-07 xseps        limit for cross sections
+# popeps           1.00E-03 popeps       limit for population cross section per nucleus
+# Rfiseps          1.00E-03 Rfiseps      ratio for limit for fission cross section per nucleus
+# elow             1.00E-06 elow         minimal incident energy for nuclear model calculations
+# angles             90     nangle       number of angles
+# anglescont         18     nanglecont   number of angles for continuum
+# anglesrec           1     nanglerec    number of recoil angles
+# maxenrec           20     maxenrec     number of recoil energies
+# channels            n     flagchannels flag for exclusive channels calculation
+# maxchannel          4     maxchannel   maximal number of outgoing particles in individual channel description
+# micro               n     flagmicro    flag for completely microscopic Talys calculation
+# best                n     flagbest     flag to use best set of adjusted parameters
+# bestbranch          y     flagbestbr   flag to use flag to use only best set of branching ratios
+# bestend             n     flagbestend  flag to put best set of parameters at end of input file
+# relativistic        y     flagrel      flag for relativistic kinematics
+# recoil              n     flagrecoil   flag for calculation of recoils
+# labddx              n     flaglabddx   flag for calculation of DDX in LAB system
+# recoilaverage       n     flagrecoilav flag for average velocity in recoil calculation
+# channelenergy       n     flagEchannel flag for channel energy for emission spectrum
+# reaction            y     flagreaction flag for calculation of nuclear reactions
+# astro               n     flagastro    flag for calculation of astrophysics reaction rate
+# astrogs             n     flagastrogs  flag for calculation of astrophysics reaction rate with target in ground state only
+# massmodel           2     massmodel    model for theoretical nuclear mass
+# expmass             y     flagexpmass  flag for using experimental nuclear mass if available
+# disctable           1     disctable    table with discrete levels
+# production          n     flagprod     flag for isotope production
+# outfy               n     flagoutfy    flag for output detailed fission yield calculation
+# gefran          50000     gefran       number of random events for GEF calculation
+# Estop            1000.000 Estop        incident energy above which TALYS stops
+# rpevap              n     flagrpevap   flag for evaporation of residual products at high incident energies
+# maxZrp             12     maxZrp       maximal number of protons away from the initial compound nucleus before residual evaporation
+# maxNrp             32     maxNrp       maximal number of neutons away from the initial compound nucleus before residual evaporation
+# #
+# # Optical model
+# #
+# localomp            y     flaglocalomp flag for local (y) or global (n) optical model
+# dispersion          n     flagdisp     flag for dispersive optical model
+# jlmomp              n     flagjlm      flag for using semi-microscopic JLM OMP
+# optmodall           n     flagompall   flag for new optical model calculation for all residual nuclei
+# incadjust           y     flagincadj   flag for OMP adjustment on incident channel also
+# omponly             n     flagomponly  flag to execute ONLY an optical model calculation
+# autorot             n     flagautorot  flag for automatic rotational coupled channels calculations for A > 150
+# spherical           y     flagspher    flag to force spherical optical model
+# coulomb             y     flagcoulomb  flag for Coulomb excitation calculation with ECIS
+# statepot            n     flagstate    flag for optical model potential for each excited state
+# maxband             0     maxband      highest vibrational band added to rotational model
+# maxrot              2     maxrot       number of included excited rotational levels
+# sysreaction               sysreaction  particles with reaction cross section from systematics
+# rotational                rotational   particles with possible rotational optical model
+# core               -1     core         even-even core for weakcoupling (-1 or 1)
+# ecissave            n     flagecissave flag for saving ECIS input and output files
+# eciscalc            y     flageciscalc flag for new ECIS calculation for outgoing particles and energy grid
+# inccalc             y     flaginccalc  flag for new ECIS calculation for incident channel
+# endfecis            y     flagendfecis flag for new ECIS calculation for ENDF-6 files
+# radialmodel         2     radialmodel  model for radial matter densities (JLM OMP only)
+# jlmmode             0     jlmmode      option for JLM imaginary potential normalization
+# alphaomp            6     alphaomp     alpha optical model (1=normal, 2= McFadden-Satchler, 3-5= folding potential, 6,8= Avrigeanu, 7=Nolte)
+# deuteronomp         1     deuteronomp  deuteron optical model (1=normal, 2=Daehnick, 3=Bojowald, 4=Han-Shi-Shen, 5=An-Cai)
+# #
+# # Compound nucleus
+# #
+# widthfluc           y     flagwidth    flag for width fluctuation calculation
+# widthmode           1     wmode        designator for width fluctuation model
+# compound            y     flagcomp     flag for compound nucleus model
+# fullhf              n     flagfullhf   flag for full spin dependence of transmission coefficients
+# eciscompound        n     flageciscomp flag for compound nucleus calculation by ECIS
+# cpang               n     flagcpang    flag for compound angular distribution calculation for incident charged particles
+# urr                 n     flagurr      flag for URR calculation
+# urrnjoy             n     flagurrnjoy  flag for normalization of URR parameters with NJOY method
+# lurr                2     lurr         maximal orbital angular momentum for URR
+# #
+# # Gamma emission
+# #
+# gammax              2     gammax       number of l-values for gamma multipolarity
+# strength            1     strength     model for E1 gamma-ray strength function
+# strengthM1          2     strengthM1   model for M1 gamma-ray strength function
+# electronconv        y     flagelectron flag for application of electron conversion coefficient
+# racap               n     flagracap    flag for radiative capture model
+# ldmodelracap        1     ldmodelracap level density model for direct radiative capture
+# #
+# # Pre-equilibrium
+# #
+# preequilibrium      n     flagpreeq    flag for pre-equilibrium calculation
+# preeqmode           2     preeqmode    designator for pre-equilibrium model
+# multipreeq          n     flagmulpre   flag for multiple pre-equilibrium calculation
+# mpreeqmode          2     mpreeqmode   designator for multiple pre-equilibrium model
+# breakupmodel        1     breakupmodel model for break-up reaction: 1. Kalbach 2. Avrigeanu
+# phmodel             1     phmodel      particle-hole state density model
+# pairmodel           2     pairmodel    designator for pre-equilibrium pairing model
+# preeqspin           2     pespinmodel  model for pre-equilibrium spin distribution
+# giantresonance      n     flaggiant    flag for collective contribution from giant resonances
+# preeqsurface        y     flagsurface  flag for surface effects in exciton model
+# preeqcomplex        y     flagpecomp   flag for Kalbach complex particle emission model
+# twocomponent        y     flag2comp    flag for two-component pre-equilibrium model
+# ecisdwba            y     flagecisdwba flag for new ECIS calculation for DWBA for MSD
+# onestep             n     flagonestep  flag for continuum one-step direct only
+# #
+# # Level densities
+# #
+# ldmodel             1     ldmodelall   level density model
+# shellmodel          1     shellmodel   model for shell correction energies
+# kvibmodel           2     kvibmodel    model for vibrational enhancement
+# spincutmodel        1     spincutmodel model for spin cutoff factor for ground state
+# asys                n     flagasys     flag for all level density parameters a from systematics
+# parity              n     flagparity   flag for non-equal parity distribution
+# colenhance          n     flagcolall   flag for collective enahncement of level density for all nuclides
+# ctmglobal           n     flagctmglob  flag for global CTM model (no discrete level info)
+# gshell              n     flaggshell   flag for energy dependence of single particle level density parameter g
+# #
+# # Fission
+# #
+# fission             n     flagfission  flag for fission
+# fismodel            1     fismodel     fission model
+# fismodelalt         4     fismodelalt  alternative fission model for default barriers
+# hbstate             y     flaghbstate  flag for head band states in fission
+# class2              y     flagclass2   flag for class2 states in fission
+# massdis             n     flagmassdis  flag for calculation of fission fragment mass yields
+# ffevaporation       y     flagffevap   flag for calculation of particle evaporation from fission fragment mass yields
+# fisfeed             n     flagfisfeed  flag for output of fission per excitation bin
+# fymodel             2     fymodel      fission yield model, 1: Brosa 2: GEF
+# ffspin              n     flagffspin   flag to use spin distribution in initial FF population
+# #
+# # Output
+# #
+# outmain             y     flagmain     flag for main output
+# outbasic            n     flagbasic    flag for output of basic information and results
+# outpopulation       n     flagpop      flag for output of population
+# outcheck            n     flagcheck    flag for output of numerical checks
+# outlevels           n     flaglevels   flag for output of discrete level information
+# outdensity          n     flagdensity  flag for output of level densities
+# outomp              n     flagoutomp   flag for output of optical model parameters
+# outdirect           n     flagdirect   flag for output of direct reaction results
+# outinverse          n     flaginverse  flag for output of transmission coefficients and inverse reaction cross sections
+# outtransenergy      y     flagtransen  flag for output of transmission coefficients per energy
+# outecis             n     flagoutecis  flag for output of ECIS results
+# outgamma            n     flaggamma    flag for output of gamma-ray information
+# outpreequilibrium   n     flagpeout    flag for output of pre-equilibrium results 
+# outfission          n     flagfisout   flag for output of fission information
+# outdiscrete         y     flagdisc     flag for output of discrete state cross sections
+# outspectra          n     flagspec     flag for output of double-differential cross sections
+# outbinspectra       n     flagbinspec  flag for output of emission spectrum per excitation bin
+# resonance           n     flagres      flag for output of low energy resonance cross sections
+# group               n     flaggroup    flag for output of low energy groupwise cross sections
+# addiscrete          y     flagadd      flag for addition of discrete states to spectra
+# addelastic          y     flagaddel    flag for addition of elastic peak to spectra
+# outangle            n     flagang      flag for output of angular distributions
+# outlegendre         n     flaglegendre flag for output of Legendre coefficients
+# ddxmode             0     ddxmode      mode for double-differential cross sections
+# outdwba             n     flagoutdwba  flag for output of DWBA cross sections for MSD
+# outgamdis           n     flaggamdis   flag for output of discrete gamma-ray intensities
+# outexcitation       n     flagexc      flag for output of excitation functions
+# components          n     flagcompo    flag for output of cross section components
+# endf                n     flagendf     flag for information for ENDF-6 file
+# endfdetail          n     flagendfdet  flag for detailed ENDF-6 information per channel
+# sacs                n     flagsacs     flag for statistical analysis of cross sections
+# partable            n     flagpartable flag for output of model parameters on separate file
+#
+# ########## BASIC REACTION PARAMETERS ##########
+#
+# Projectile           : alpha       Mass in a.m.u.      :   4.002603
+# Target               :  34S        Mass in a.m.u.      :  33.967867
+#
+# Included channels:
+#                     gamma   
+#                     neutron 
+#                     proton  
+#                     deuteron
+#                     triton  
+#                     helium-3
+#                     alpha   
+#
+# 1 incident energy (LAB):
+#
+#      6.522
+#
+# Q-values for binary reactions:
+#
+# Q(a,g):  7.20804
+# Q(a,n): -4.63046
+# Q(a,p): -3.03423
+# Q(a,d):-11.12048
+# Q(a,t):-13.44304
+# Q(a,h):-13.59177
+# Q(a,a):  0.00000
+#
+# ########## RESULTS FOR E=  6.52240 ##########
+#
+# Energy dependent input flags
+#
+# Width fluctuations (flagwidth)            : y
+# Unresolved resonance parameters (flagurr) : n
+# Preequilibrium (flagpreeq)                : n
+# Multiple preequilibrium (flagmulpre)      : n
+# Number of continuum excitation energy bins: 40
+#
+# ########### REACTION SUMMARY FOR E=  6.52240 ###########
+#
+# Center-of-mass energy:   5.834
+#
+# 1. Total (binary) cross sections
+#
+#   Reaction        = 2.21590E+02
+#     Compound elastic= 1.18266E+02
+#     Non-elastic     = 1.03324E+02
+#       Direct          = 5.69059E-02
+#       Pre-equilibrium = 0.00000E+00
+#       Compound non-el = 1.03267E+02
+#
+# 2. Binary non-elastic cross sections (non-exclusive)
+#
+# gamma   = 8.58045E-02
+# neutron = 7.16399E+01
+# proton  = 2.91790E+01
+# deuteron= 0.00000E+00
+# triton  = 0.00000E+00
+# helium-3= 0.00000E+00
+# alpha   = 2.41934E+00
+#
+# 3. Total particle production cross sections
+#
+# gamma   = 1.32109E-01    Multiplicity= 1.27859E-03
+# neutron = 7.16401E+01    Multiplicity= 6.93352E-01
+# proton  = 2.91795E+01    Multiplicity= 2.82407E-01
+# deuteron= 0.00000E+00    Multiplicity= 0.00000E+00
+# triton  = 0.00000E+00    Multiplicity= 0.00000E+00
+# helium-3= 0.00000E+00    Multiplicity= 0.00000E+00
+# alpha   = 2.42327E+00    Multiplicity= 2.34530E-02
+#
+# 4. Residual production cross sections
+#
+#   a. Per isotope
+#
+#   Z   A  nuclide    total     level   isomeric    isomeric    lifetime
+#                 cross section       cross section  ratio
+#
+#   18  38 ( 38Ar) 8.11469E-02    0    8.11469E-02  1.00000
+#   18  37 ( 37Ar) 7.16401E+01    0    7.16401E+01  1.00000
+#   17  37 ( 37Cl) 2.91795E+01    0    2.91795E+01  1.00000
+#   16  34 ( 34S ) 2.42327E+00    0    2.42327E+00  1.00000
+#
+#   b. Per mass
+#
+#   A  cross section
+#
+#   38 8.11469E-02
+#   37 1.00820E+02
+#   34 2.42327E+00
+#
+# Total residual production cross section:   103.32401
+# Non-elastic cross section              :   103.32431
+#
+# 5. Binary reactions to discrete levels and continuum
+#
+#   (a,g)   cross sections:
+#
+# Inclusive:
+#
+# Level Energy    E-out     J/P       Direct    Compound      Total     Origin
+#
+#  0   0.00000  13.04241    0.0+     0.00000     0.00847     0.00847          
+#  1   2.16764  10.87477    2.0+     0.00000     0.00937     0.00937          
+#  2   3.37780   9.66461    0.0+     0.00000     0.00085     0.00085          
+#  3   3.81016   9.23225    3.0-     0.00000     0.00458     0.00458          
+#  4   3.93640   9.10601    2.0+     0.00000     0.00252     0.00252          
+#  5   4.47996   8.56245    4.0-     0.00000     0.00378     0.00378          
+#  6   4.56540   8.47701    2.0+     0.00000     0.00153     0.00153          
+#  7   4.58586   8.45655    5.0-     0.00000     0.00670     0.00670          
+#  8   4.70970   8.33271    0.0+     0.00000     0.00030     0.00030          
+#  9   4.87704   8.16537    3.0-     0.00000     0.00197     0.00197          
+# 10   5.08440   7.95801    2.0-     0.00000     0.00089     0.00089          
+#                                  ---------   ---------   ---------
+# Discrete    (a,g)  :               0.00000     0.04095     0.04095
+# Continuum   (a,g)  :               0.00000     0.04486     0.04486
+#                                  ---------   ---------   ---------
+# Total       (a,g)  :               0.00000     0.08580     0.08580
+#
+#
+#   (a,n)   cross sections:
+#
+# Inclusive:
+#
+# Level Energy    E-out     J/P       Direct    Compound      Total     Origin
+#
+#  0   0.00000   1.20391    1.5+     0.00000    71.63990    71.63990          
+#  1   1.40984  -0.20593    0.5+     0.00000     0.00000     0.00000          
+#  2   1.61128  -0.40737    3.5-     0.00000     0.00000     0.00000          
+#  3   2.21700  -1.01309    3.5+     0.00000     0.00000     0.00000          
+#  4   2.49017  -1.28626    1.5-     0.00000     0.00000     0.00000          
+#  5   2.79615  -1.59224    2.5+     0.00000     0.00000     0.00000          
+#  6   3.17000  -1.96609    2.5+     0.00000     0.00000     0.00000          
+#  7   3.18474  -1.98083    4.5-     0.00000     0.00000     0.00000          
+#  8   3.27358  -2.06967    2.5-     0.00000     0.00000     0.00000          
+#  9   3.51810  -2.31419    1.5-     0.00000     0.00000     0.00000          
+# 10   3.52676  -2.32285    3.5-     0.00000     0.00000     0.00000          
+#                                  ---------   ---------   ---------
+# Discrete    (a,n)  :               0.00000    71.63990    71.63990
+# Continuum   (a,n)  :               0.00000     0.00000     0.00000
+#                                  ---------   ---------   ---------
+# Total       (a,n)  :               0.00000    71.63990    71.63991
+#
+# (a,gn) cross section:     0.00019
+#
+#   (a,p)   cross sections:
+#
+# Inclusive:
+#
+# Level Energy    E-out     J/P       Direct    Compound      Total     Origin
+#
+  0   0.00000   2.80014    1.5+     0.00000    29.09549    29.09549          
+  1   1.72658   1.07356    0.5+     0.00000     0.08347     0.08347          
+#  2   3.08612  -0.28598    2.5+     0.00000     0.00000     0.00000          
+#                                  ---------   ---------   ---------
+# Discrete    (a,p)  :               0.00000    29.17896    29.17896
+# Continuum   (a,p)  :               0.00000     0.00000     0.00000
+#                                  ---------   ---------   ---------
+# Total       (a,p)  :               0.00000    29.17896    29.17896
+#
+# (a,gp) cross section:     0.00053
+#
+# Inelastic cross sections:
+#
+# Inclusive:
+#
+# Level Energy    E-out     J/P       Direct    Compound      Total     Origin
+#
+#  1   2.12756   3.70681    2.0+     0.05690     2.35463     2.41153    Direct
+#  2   3.30421   2.53016    2.0+     0.00000     0.00778     0.00779    Direct
+#  3   3.91641   1.91796    0.0+     0.00000     0.00001     0.00001          
+#  4   4.07467   1.75970    1.0+     0.00000     0.00000     0.00000          
+#  5   4.11481   1.71956    2.0+     0.00000     0.00000     0.00000    Direct
+#  6   4.62440   1.20997    3.0-     0.00000     0.00000     0.00000    Direct
+#  7   4.68898   1.14539    4.0+     0.00000     0.00000     0.00000    Direct
+#  8   4.87684   0.95753    3.0+     0.00000     0.00000     0.00000          
+#  9   4.88200   0.95237    4.0+     0.00000     0.00000     0.00000    Direct
+# 10   4.88976   0.94461    2.0+     0.00000     0.00000     0.00000    Direct
+# 11   5.22818   0.60619    0.0+     0.00000     0.00000     0.00000          
+# 12   5.32251   0.51186    2.0-     0.00000     0.00000     0.00000          
+# 13   5.38099   0.45338    1.0+     0.00000     0.00000     0.00000          
+# 14   5.67993   0.15444    3.0-     0.00000     0.00000     0.00000          
+# 15   5.69070   0.14367    5.0-     0.00000     0.00000     0.00000          
+# 16   5.75588   0.07849    1.0-     0.00000     0.00000     0.00000          
+# 17   5.84753  -0.01316    0.0+     0.00000     0.00000     0.00000          
+# 18   5.99810  -0.16373    2.0+     0.00000     0.00000     0.00000          
+# 19   6.12149  -0.28712    2.0+     0.00000     0.00000     0.00000          
+# 20   6.16886  -0.33449    3.0-     0.00000     0.00000     0.00000          
+# 21   6.25122  -0.41685    4.0+     0.00000     0.00000     0.00000          
+# 22   6.29709  -0.46272    4.0-     0.00000     0.00000     0.00000          
+# 23   6.34250  -0.50813    1.0-     0.00000     0.00000     0.00000          
+# 24   6.42142  -0.58705    4.0-     0.00000     0.00000     0.00000          
+# 25   6.42812  -0.59375    2.0+     0.00000     0.00000     0.00000          
+# 26   6.47877  -0.64440    1.0-     0.00000     0.00000     0.00000          
+# 27   6.53500  -0.70063    1.0-     0.00000     0.00000     0.00000          
+# 28   6.63900  -0.80463    4.0-     0.00000     0.00000     0.00000          
+# 29   6.68533  -0.85096    3.0-     0.00000     0.00000     0.00000          
+# 30   6.73100  -0.89663    2.0+     0.00000     0.00000     0.00000          
+#                                  ---------   ---------   ---------
+# Discrete  Inelastic:               0.05691     2.36243     2.41934
+# Continuum Inelastic:               0.00000     0.00000     0.00000
+#                                  ---------   ---------   ---------
+# Total     Inelastic:               0.05691     2.36243     2.41934
+#
+# (a,ga) cross section:     0.00393
+#
+# Execution time:  0 hours  0 minutes  2.25 seconds 
+#
+# The TALYS team congratulates you with this successful calculation.
